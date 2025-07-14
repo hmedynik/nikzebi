@@ -206,11 +206,10 @@ const SecurityDemo = () => {
   const [f11Timer, setF11Timer] = useState(null);
   const [f11Progress, setF11Progress] = useState(0);
 
-  // Remove the old ESC useEffect and replace with this:
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "F11") {
-        e.preventDefault(); // Override browser F11 behavior
+        e.preventDefault();
         e.stopPropagation();
 
         if (!f11Pressed) {
@@ -218,14 +217,13 @@ const SecurityDemo = () => {
           setF11Progress(0);
           f11PressStart.current = Date.now();
 
-          // Animate progress bar
           const progressInterval = setInterval(() => {
             setF11Progress((prev) => {
               if (prev >= 100) {
                 clearInterval(progressInterval);
                 return 100;
               }
-              return prev + 2.5; // 2000ms / 80 updates = 25ms per update
+              return prev + 2.5;
             });
           }, 25);
 
@@ -243,7 +241,6 @@ const SecurityDemo = () => {
           setF11Timer(timer);
         }
       } else {
-        // ALL other keys (including ESC) force fullscreen
         e.preventDefault();
         e.stopPropagation();
         forceFullscreen();
@@ -275,7 +272,6 @@ const SecurityDemo = () => {
       }
     };
 
-    // Block right-click context menu
     const blockContextMenu = (e) => {
       e.preventDefault();
       forceFullscreen();
@@ -283,7 +279,6 @@ const SecurityDemo = () => {
       return false;
     };
 
-    // Block text selection
     const blockSelection = (e) => {
       e.preventDefault();
       return false;
@@ -307,39 +302,6 @@ const SecurityDemo = () => {
     };
   }, [f11Pressed, f11Timer, isFullscreen, audioEnabled]);
 
-  const startScanSequence = () => {
-    const scanInterval = setInterval(() => {
-      setScanProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(scanInterval);
-          setTimeout(() => setCurrentStep(2), 1000);
-          return 100;
-        }
-        return prev + 2;
-      });
-    }, 100);
-
-    const itemsInterval = setInterval(() => {
-      setItemsScanned((prev) => {
-        if (prev >= 51900) {
-          clearInterval(itemsInterval);
-          return 51900;
-        }
-        return prev + Math.floor(Math.random() * 1000) + 500;
-      });
-    }, 50);
-
-    const threatsInterval = setInterval(() => {
-      setThreatsFound((prev) => {
-        if (prev >= 11) {
-          clearInterval(threatsInterval);
-          return 11;
-        }
-        return prev + 1;
-      });
-    }, 800);
-  };
-
   const handleUserInteraction = () => {
     forceFullscreen();
     triggerStrobeEffect();
@@ -352,8 +314,6 @@ const SecurityDemo = () => {
           .catch((e) => console.log("Audio play failed:", e));
       }
     }
-
-    // Show popup on every click
     setShowPopup(true);
   };
 
