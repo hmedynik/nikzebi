@@ -16,9 +16,6 @@ const SecurityDemo = () => {
   const [audioEnabled, setAudioEnabled] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [blackScreen, setBlackScreen] = useState(false);
-  const [escPressed, setEscPressed] = useState(false);
-  const [escTimer, setEscTimer] = useState(null);
-  const [escProgress, setEscProgress] = useState(0);
   const audioRef = useRef(null);
   const containerRef = useRef(null);
 
@@ -1006,24 +1003,6 @@ const SecurityDemo = () => {
       className={`security-demo ${isFullscreen ? "fullscreen" : ""}`}
       onClick={handleUserInteraction}
     >
-      {/* ESC progress indicator */}
-      {escPressed && (
-        <div className="esc-progress-overlay">
-          <div className="esc-progress-container">
-            <div className="esc-progress-bar">
-              <div
-                className="esc-progress-fill"
-                style={{ width: `${escProgress}%` }}
-              ></div>
-            </div>
-            <p>
-              Maintenez ESC pour quitter le mode plein écran... (
-              {Math.round(escProgress)}%)
-            </p>
-          </div>
-        </div>
-      )}
-
       {/* Black screen overlay for stroboscopic effect */}
       {blackScreen && <div className="black-screen-overlay"></div>}
 
