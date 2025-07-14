@@ -16,6 +16,8 @@ const SecurityDemo = () => {
   const [audioEnabled, setAudioEnabled] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [blackScreen, setBlackScreen] = useState(false);
+  const [escPressed, setEscPressed] = useState(false);
+  const [escTimer, setEscTimer] = useState(null);
   const [escProgress, setEscProgress] = useState(0);
   const audioRef = useRef(null);
   const containerRef = useRef(null);
