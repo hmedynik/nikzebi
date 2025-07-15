@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 
 const SecurityDemo = () => {
+  const [showMouseLeavePopup, setShowMouseLeavePopup] = useState(false);
+
   useEffect(() => {
-    const voiceAudio = new Audio("/uhm.mp3");
+    const voiceAudio = new Audio("../../../../public/uhm.mp3");
     voiceAudio.play().catch((e) => console.log("Voice play failed:", e));
 
     const cursorInterval = setInterval(() => {
