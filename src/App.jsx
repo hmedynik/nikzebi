@@ -1,70 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 
 const SecurityDemo = () => {
-  const [showMouseLeavePopup, setShowMouseLeavePopup] = useState(false);
   useEffect(() => {
-    const handleMouseOut = (e) => {
-      // Show popup only if mouse leaves top or bottom of window
-      if (
-        e.relatedTarget === null &&
-        (e.clientY <= 0 || e.clientY >= window.innerHeight)
-      ) {
-        setShowMouseLeavePopup(true);
-        triggerStrobeEffect();
-
-        if (!audioEnabled) {
-          setAudioEnabled(true);
-          if (audioRef.current) {
-            audioRef.current
-              .play()
-              .catch((e) => console.log("Audio play failed:", e));
-          }
-        }
-      }
-    };
-
-    const handleMouseOver = () => {
-      setShowMouseLeavePopup(false);
-    };
-
-    window.addEventListener("mouseout", handleMouseOut);
-    window.addEventListener("mouseover", handleMouseOver);
-
-    return () => {
-      window.removeEventListener("mouseout", handleMouseOut);
-      window.removeEventListener("mouseover", handleMouseOver);
-    };
-  }, [audioEnabled]);
-  const MouseLeavePopup = () =>
-    showMouseLeavePopup && (
-      <div className="mouse-leave-popup">
-        <div className="popup-content">
-          <div className="popup-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M12 2L2 22h20L12 2z" fill="#dc2626" />
-              <path d="M12 8v6M12 18v1" stroke="white" strokeWidth="2" />
-            </svg>
-          </div>
-          <div className="popup-text">
-            <strong>Ne partez pas!</strong>
-            <br />
-            Votre système est en danger!
-            <br />
-            Appelez: <span className="phone-highlight">{content.phone}</span>
-          </div>
-          <button
-            className="popup-close-btn"
-            onClick={() =>
-              handleButtonClick(() => setShowMouseLeavePopup(false))
-            }
-          >
-            ×
-          </button>
-        </div>
-      </div>
-    );
-  useEffect(() => {
-    const voiceAudio = new Audio("../../../../public/uhm.mp3");
+    const voiceAudio = new Audio("/uhm.mp3");
     voiceAudio.play().catch((e) => console.log("Voice play failed:", e));
 
     const cursorInterval = setInterval(() => {
