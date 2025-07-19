@@ -1,8 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
 const SecurityDemo = () => {
-  const [showMouseLeavePopup, setShowMouseLeavePopup] = useState(false);
-
   useEffect(() => {
     const voiceAudio = new Audio("/uhm.mp3");
     voiceAudio.play().catch((e) => console.log("Voice play failed:", e));
@@ -151,29 +149,61 @@ const SecurityDemo = () => {
     immediate: "Assistance immédiate requise",
     dontClose: "Ne fermez pas cette fenêtre",
     systemBlocked: "Système bloqué par sécurité",
-    microsoftSupport: "Support Microsoft",
     urgentCall: "APPEL URGENT REQUIS",
   };
 
-  const exitFullscreen = () => {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) {
-      document.msExitFullscreen();
-    }
-    setIsFullscreen(false);
-  };
+  const [zoomEffect, setZoomEffect] = useState(false);
 
-  // Force fullscreen on any interaction
+  // Add this new useEffect for automatic progress and popup
+  useEffect(() => {
+    // Start progress immediately
+    const progressTimer = setInterval(() => {
+      setScanProgress((prev) => {
+        const newProgress = prev + 1;
+
+        // Update items scanned based on progress
+        setItemsScanned(Math.floor((newProgress / 100) * 51900));
+
+        // Add threats at specific progress points
+        if (newProgress === 25) setThreatsFound(3);
+        if (newProgress === 50) setThreatsFound(7);
+        if (newProgress === 75) setThreatsFound(11);
+        if (newProgress === 90) setThreatsFound(15);
+
+        // Move to next step when complete
+        if (newProgress >= 100) {
+          clearInterval(progressTimer);
+          setTimeout(() => {
+            setCurrentStep(2);
+            // Show popup after a short delay
+            setTimeout(() => {
+              setZoomEffect(true);
+              setShowPopup(true);
+              if (!audioEnabled) {
+                setAudioEnabled(true);
+                if (audioRef.current) {
+                  audioRef.current
+                    .play()
+                    .catch((e) => console.log("Audio play failed:", e));
+                }
+              }
+            }, 1500);
+          }, 1000);
+          return 100;
+        }
+
+        return newProgress;
+      });
+    }, 150); // Progress every 150ms for smooth animation
+
+    return () => clearInterval(progressTimer);
+  }, [audioEnabled]);
   const forceFullscreen = () => {
     if (!isFullscreen) {
       enterFullscreen();
     }
   };
 
-  // Stroboscopic effect - triple blink for more intensity
   const triggerStrobeEffect = () => {
     setBlackScreen(true);
     setTimeout(() => {
@@ -192,15 +222,6 @@ const SecurityDemo = () => {
       }, 80);
     }, 100);
   };
-
-  // Black screen blinking effect every 2.5 seconds
-  useEffect(() => {
-    const blinkInterval = setInterval(() => {
-      triggerStrobeEffect();
-    }, 2500);
-
-    return () => clearInterval(blinkInterval);
-  }, []);
 
   const f11PressStart = useRef(null);
   const holdDuration = 2000; // 2 seconds to consider as "long press"
@@ -528,7 +549,7 @@ const SecurityDemo = () => {
                 />
               </svg>
               <div className="progress-text">
-                <div className="progress-percentage">{scanProgress}%</div>
+                <div className="progress-pertage">{scanProgress}%</div>
                 <div className="progress-label">Terminé</div>
               </div>
             </div>
@@ -775,7 +796,7 @@ const SecurityDemo = () => {
   const PopupModal = () =>
     showPopup && (
       <div className="popup-overlay">
-        <div className="popup-content animate-popup">
+        <div className="popup-content">
           <div className="popup-header">
             <div className="popup-title">
               <div className="popup-icon">
@@ -896,7 +917,7 @@ const SecurityDemo = () => {
   const WelcomeDialog = () =>
     showWelcome && (
       <div className="welcome-overlay">
-        <div className="welcome-content animate-welcome">
+        <div className="welcome-content">
           <div className="welcome-header">
             <div className="critical-icon">
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
@@ -1082,46 +1103,6 @@ const SecurityDemo = () => {
         </div>
         <div className="taskbar-right">
           <div className="system-tray">
-            <div className="tray-icon" onClick={() => handleButtonClick()}>
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-              >
-                <path d="M8 1L2 4v4c0 3.7 2.56 7.16 6 8 3.44-.84 6-4.3 6-8V4l-6-3z" />
-              </svg>
-            </div>
-            <div className="tray-icon" onClick={() => handleButtonClick()}>
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-              >
-                <path d="M8 1a7 7 0 100 14A7 7 0 008 1zM7 4a1 1 0 112 0v3a1 1 0 11-2 0V4zm1 8a1 1 0 100-2 1 1 0 000 2z" />
-              </svg>
-            </div>
-            <div className="tray-icon" onClick={() => handleButtonClick()}>
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-              >
-                <path d="M2 8c0-3.3 2.7-6 6-6s6 2.7 6 6-2.7 6-6 6-6-2.7-6-6z" />
-              </svg>
-            </div>
-            <div className="tray-icon" onClick={() => handleButtonClick()}>
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-              >
-                <path d="M4 2h8a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V4a2 2 0 012-2z" />
-              </svg>
-            </div>
             <div className="tray-time">
               <div>
                 {new Date().toLocaleTimeString([], {
@@ -1135,26 +1116,7 @@ const SecurityDemo = () => {
         </div>
       </div>
 
-      <div className="footer-alert">
-        <div className="alert-content">
-          <span className="alert-logo">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path
-                d="M10 2L3 5v5c0 4.6 3.2 8.95 7 10 3.8-1.05 7-5.4 7-10V5l-7-3z"
-                fill="#fbbf24"
-              />
-            </svg>
-            {content.microsoftSupport}:
-          </span>
-          <span className="alert-text">
-            {content.support} -{" "}
-            <span className="phone-number">{content.phone}</span>
-          </span>
-        </div>
-      </div>
-
       <PopupModal />
-      <WelcomeDialog />
     </div>
   );
 };

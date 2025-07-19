@@ -340,7 +340,7 @@
 
 .stat-item.threat-stat {
   background: #fef6f6;
-  border-color: #d13438;
+  border-color: #28303c;
 }
 
 .stat-number {
@@ -351,7 +351,7 @@
 }
 
 .threat-number {
-  color: #d13438;
+  color: #28303c;
   animation: threatPulse 2s infinite;
 }
 
@@ -404,8 +404,8 @@
 }
 
 .windows-button.primary.danger {
-  background: #d13438;
-  border-color: #d13438;
+  background: #28303c;
+  border-color: #28303c;
 }
 
 .windows-button.primary.danger:hover {
@@ -460,7 +460,7 @@
 .results-header h2 {
   font-size: 20px;
   font-weight: 600;
-  color: #d13438;
+  color: #28303c;
   margin: 0;
 }
 
@@ -586,7 +586,7 @@
 
 .threat-type {
   font-size: 12px;
-  color: #d13438;
+  color: #28303c;
   font-weight: 500;
 }
 
@@ -611,7 +611,6 @@
 .status-badge.quarantine {
   background: #fff4ce;
   color: #8a8100;
-  border: 1px solid #ffdb00;
 }
 
 .results-actions {
@@ -802,7 +801,7 @@
 }
 
 .threat-metric {
-  color: #d13438;
+  color: #28303c;
   animation: threatPulse 2s infinite;
 }
 
@@ -812,7 +811,7 @@
   gap: 12px;
   padding: 16px;
   background: #fef6f6;
-  border: 1px solid #d13438;
+  border: 1px solid #28303c;
   border-radius: 4px;
   animation: warningPulse 3s ease-in-out infinite;
 }
@@ -830,7 +829,7 @@
 .warning-icon {
   width: 24px;
   height: 24px;
-  color: #d13438;
+  color: #28303c;
   animation: warningShake 0.5s ease-in-out infinite;
 }
 
@@ -850,7 +849,7 @@
 .warning-content h3 {
   font-size: 16px;
   font-weight: 600;
-  color: #d13438;
+  color: #28303c;
   margin: 0 0 4px 0;
 }
 
@@ -943,7 +942,7 @@
 
 .popup-close:hover {
   background: #f3f2f1;
-  color: #d13438;
+  color: #28303c;
 }
 
 .popup-body {
@@ -956,7 +955,7 @@
   gap: 12px;
   padding: 12px;
   background: #fef6f6;
-  border: 1px solid #d13438;
+  border: 1px solid #28303c;
   border-radius: 4px;
   margin-bottom: 16px;
 }
@@ -964,7 +963,7 @@
 .alert-icon {
   width: 24px;
   height: 24px;
-  color: #d13438;
+  color: #28303c;
 }
 
 .alert-text {
@@ -1003,7 +1002,7 @@
   right: -4px;
   width: 24px;
   height: 24px;
-  color: #d13438;
+  color: #28303c;
   animation: warningBlink 1s infinite;
 }
 
@@ -1027,9 +1026,97 @@
   line-height: 1.4;
 }
 
+.support-message {
+  color: #0078d4;
+  text-align: center;
+  font-weight: 500;
+}
+
+.instruction-message {
+  text-align: center;
+  font-weight: 500;
+  color: #605e5c;
+}
+
+/* Microsoft-style phone container */
+.big-phone-container {
+  background: linear-gradient(135deg, #0078d4 0%, #106ebe 100%);
+  border-radius: 8px;
+  padding: 24px;
+  margin: 20px 0;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 120, 212, 0.3);
+  border: 1px solid #005a9e;
+}
+
+.urgent-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  opacity: 0.9;
+}
+
+.big-phone-number {
+  font-size: 28px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 12px 0;
+  letter-spacing: 1px;
+  font-family:
+    "Segoe UI",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+}
+
+.call-now-btn {
+  background: #ffffff;
+  color: #0078d4;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: 1px solid #ffffff;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-block;
+  margin-top: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .big-phone-number {
+    font-size: 24px;
+  }
+
+  .big-phone-container {
+    padding: 20px;
+    margin: 16px 0;
+  }
+
+  .call-now-btn {
+    font-size: 13px;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .big-phone-number {
+    font-size: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  .urgent-label {
+    font-size: 12px;
+  }
+}
+
 .main-message {
   font-weight: 600;
-  color: #d13438;
+  color: #28303c;
   text-align: center;
   font-size: 14px !important;
 }
@@ -1085,9 +1172,9 @@
 }
 
 .popup-button.primary {
-  background: #d13438;
+  background: #28303c;
   color: white;
-  border-color: #d13438;
+  border-color: #28303c;
 }
 
 .popup-button.primary:hover {
@@ -1152,7 +1239,6 @@
 .critical-icon {
   width: 48px;
   height: 48px;
-  color: #ffdb00;
   margin: 0 auto 12px;
   animation: criticalPulse 1s ease-in-out infinite;
 }
@@ -1170,13 +1256,11 @@
 .welcome-header h2 {
   font-size: 20px;
   font-weight: 700;
-  color: #ffdb00;
   margin: 0 0 12px 0;
 }
 
 .alert-decoration {
   height: 2px;
-  background: linear-gradient(90deg, transparent, #ffdb00, transparent);
   margin: 0 auto;
   width: 200px;
 }
@@ -1241,7 +1325,6 @@
 .data-icon {
   width: 20px;
   height: 20px;
-  color: #ffdb00;
 }
 
 .warning-text {
@@ -1253,11 +1336,6 @@
   font-size: 13px;
   line-height: 1.4;
   color: #d2d0ce;
-}
-
-.critical-warning {
-  color: #ffdb00 !important;
-  font-weight: 600 !important;
 }
 
 .support-call {
@@ -1274,7 +1352,6 @@
 .call-icon {
   width: 32px;
   height: 32px;
-  color: #ffdb00;
   animation: callRing 2s ease-in-out infinite;
 }
 
@@ -1454,11 +1531,9 @@
 }
 
 .tray-time {
-  text-align: right;
   font-size: 12px;
   color: #d1d5db;
   line-height: 1.2;
-  margin-left: 16px;
 }
 
 .footer-alert {
@@ -1707,18 +1782,6 @@
   }
 }
 
-/* Big Phone Number Container */
-.big-phone-container {
-  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-  border: 3px solid #fbbf24;
-  border-radius: 12px;
-  padding: 24px;
-  margin: 20px 0;
-  text-align: center;
-  box-shadow: 0 8px 32px rgba(220, 38, 38, 0.4);
-  animation: phoneContainerPulse 1.5s ease-in-out infinite;
-}
-
 @keyframes phoneContainerPulse {
   0%,
   100% {
@@ -1734,11 +1797,9 @@
 .urgent-label {
   font-size: 16px;
   font-weight: 700;
-  color: #fbbf24;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 8px;
-  animation: urgentBlink 1s ease-in-out infinite;
 }
 
 @keyframes urgentBlink {
@@ -1755,10 +1816,8 @@
   font-size: 32px;
   font-weight: 900;
   color: #ffffff;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
   margin: 12px 0;
   letter-spacing: 2px;
-  animation: phoneNumberGlow 2s ease-in-out infinite;
 }
 
 @keyframes phoneNumberGlow {
@@ -1771,57 +1830,6 @@
     text-shadow: 0 0 20px rgba(251, 191, 36, 0.8);
     color: #fbbf24;
   }
-}
-
-.call-now-btn {
-  background: #fbbf24;
-  color: #1f2937;
-  font-size: 18px;
-  font-weight: 700;
-  padding: 12px 24px;
-  border-radius: 8px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-top: 12px;
-  animation: callButtonBounce 1s ease-in-out infinite;
-  display: inline-block;
-  box-shadow: 0 4px 16px rgba(251, 191, 36, 0.3);
-}
-
-@keyframes callButtonBounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-4px);
-  }
-}
-
-/* Enhanced popup phone number */
-.phone-number-big {
-  font-size: 28px;
-  font-weight: 900;
-  color: #fbbf24;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-  margin: 8px 0;
-  letter-spacing: 2px;
-  animation: phoneNumberGlow 2s ease-in-out infinite;
-}
-
-/* Enhanced footer phone number */
-.footer-alert .phone-number {
-  background: rgba(251, 191, 36, 0.2);
-  border: 2px solid #fbbf24;
-  border-radius: 6px;
-  padding: 8px 16px;
-  font-size: 20px;
-  color: #fbbf24;
-  font-weight: 900;
-  letter-spacing: 1px;
-  animation: footerPhoneFlash 1s ease-in-out infinite;
-  display: inline-block;
-  margin-left: 12px;
 }
 
 @keyframes footerPhoneFlash {
@@ -1984,25 +1992,6 @@
   }
 }
 
-@media (max-width: 480px) {
-  .big-phone-number {
-    font-size: 20px;
-    letter-spacing: 1px;
-  }
-
-  .phone-number-big {
-    font-size: 18px;
-  }
-
-  .call-now-btn {
-    font-size: 16px;
-    padding: 10px 20px;
-  }
-
-  .urgent-label {
-    font-size: 14px;
-  }
-}
 @keyframes pulse {
   0% {
     transform: scale(1);
